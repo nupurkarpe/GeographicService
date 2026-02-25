@@ -11,5 +11,7 @@ namespace GeographicService.Application.Interface
         Task<List<CityResponseDTO>> AddCity(string countryCode, string stateCode);
         Task<CityResponseDTO> FetchCityByName(string name);
         Task<PagedResult<CityResponseDTO>> FetchCityByState(string code, int page = 1, int pageSize = 10, string? name = null);
+
+        Task<List<CityResponseDTO>> FetchCityDDl();
     }
 }

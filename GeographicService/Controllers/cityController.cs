@@ -47,9 +47,16 @@ namespace GeographicService.Controllers
             var res = await repo.FetchCityByState(code, page, pageSize, name);
             if (res.Items.Count == 0)
             {
-                return Ok(ApiResponse.Success("No State found ", res));
+                return Ok(ApiResponse.Success("No City found ", res));
             }
-            return Ok(ApiResponse.Success("States fetched successfully", res));
+            return Ok(ApiResponse.Success("City fetched successfully", res));
+        }
+
+        [HttpGet("city")]
+        public async Task<IActionResult> FetchCityDDL()
+        {
+            var res = await repo.FetchCityDDl();           
+            return Ok(ApiResponse.Success("City fetched successfully", res));
         }
     }
 }

@@ -119,5 +119,11 @@ namespace GeographicService.Infrastructure.Repository
 
             return result;
         }
+
+        public async Task<List<CityResponseDTO>> FetchCityDDl()
+        {
+            var city = await db.city.Where(o => o.deletedAt == null).Include(c => c.state).OrderBy(o => o.name).ToListAsync();
+            return mapper.Map<List<CityResponseDTO>>(city);
+        }
     }
 }
