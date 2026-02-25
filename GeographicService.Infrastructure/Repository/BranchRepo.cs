@@ -101,7 +101,12 @@ namespace GeographicService.Infrastructure.Repository
             }
             if (!string.IsNullOrEmpty(dto.name))
             {
-                if (await branchNameExists(dto.name))
+                var nameExists = await db.branch
+         .AnyAsync(b =>
+             b.name.ToLower() == dto.name.ToLower()
+             && b.branchId != branchId);  
+
+                if (nameExists)
                 {
                     throw new InvalidOperationException("Branch Name already exists");
                 }
