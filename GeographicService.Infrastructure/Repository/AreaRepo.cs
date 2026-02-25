@@ -112,7 +112,7 @@ namespace GeographicService.Infrastructure.Repository
             }
             var totalItems = await area.CountAsync();
 
-            var areas = await area.OrderByDescending(o => o.createdAt).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var areas = await area.Include(c => c.city).OrderByDescending(o => o.createdAt).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
             var result = new PagedResult<AreaResponseDTO>
             {
