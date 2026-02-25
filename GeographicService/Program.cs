@@ -27,7 +27,17 @@ builder.Services.AddScoped<IStateRepo, StateRepo>();
 builder.Services.AddScoped<ICityRepo, CityRepo>();
 builder.Services.AddScoped<IAreaRepo, AreaRepo>();
 builder.Services.AddScoped<IBranchRepo, BranchRepo>();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular",
+        policy =>
+        {
+            policy
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 builder.Services.AddHttpClient();
 var app = builder.Build();
 
@@ -36,6 +46,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+app.UseRouting();
+app.UseCors("AllowAngular");
 app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
