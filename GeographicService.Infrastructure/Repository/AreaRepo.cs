@@ -108,7 +108,7 @@ namespace GeographicService.Infrastructure.Repository
             if (!string.IsNullOrEmpty(name))
             {
                 name = name.ToLower();
-                area = area.Where(o => o.name.ToLower() == name);
+                area = area.Where(o => o.name.ToLower().Contains(name));
             }
             var totalItems = await area.CountAsync();
 

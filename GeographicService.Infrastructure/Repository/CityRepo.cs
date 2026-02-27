@@ -61,7 +61,7 @@ namespace GeographicService.Infrastructure.Repository
             if (!string.IsNullOrEmpty(name))
             {
                 name = name.ToLower();
-                city = city.Where(o => o.name.ToLower() == name);
+                city = city.Where(o => o.name.ToLower().Contains(name));
             }
             var totalItems = await city.CountAsync();
 

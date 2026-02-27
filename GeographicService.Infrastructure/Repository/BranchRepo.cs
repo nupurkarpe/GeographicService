@@ -137,7 +137,7 @@ namespace GeographicService.Infrastructure.Repository
             if (!string.IsNullOrEmpty(name))
             {
                 name = name.ToLower();
-                branch = branch.Where(o => o.name.ToLower() == name);
+                branch = branch.Where(o => o.name.ToLower().Contains(name));
             }
             var totalItems = await branch.CountAsync();
 

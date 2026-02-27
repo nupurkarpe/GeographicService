@@ -56,7 +56,8 @@ namespace GeographicService.Infrastructure.Repository
             if (!string.IsNullOrEmpty(name))
             {
                 name = name.ToLower();
-                state = state.Where(o => o.name.ToLower() == name);
+                state = state.Where(o => o.name.ToLower().Contains(name));
+
             }
             var totalItems = await state.CountAsync();
 
